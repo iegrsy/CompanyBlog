@@ -136,6 +136,46 @@ function AddUser($username, $email, $password, $birthday)
     mysqli_close($db);
 }
 
+function AddPost($userid, $title, $body, $date)
+{
+    $db = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+    // Check connection
+    if (!$db) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+
+    $sql = "INSERT INTO Posts (userid, title, body, date) VALUES ('$userid', '$title', '$body', '$date');";
+    $result = mysqli_query($db, $sql);
+
+    if ($result) {
+        echo ('{"isadd":true, "err":""}');
+    } else {
+        echo ('{"isadd":false, "err":"' . mysqli_error($db) . '"}');
+    }
+
+    mysqli_close($db);
+}
+
+function AddComment($userid, $postid, $comment, $date)
+{
+    $db = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+    // Check connection
+    if (!$db) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+
+    $sql = "INSERT INTO Comments (userid, postid, comment, date) VALUES ('$userid', '$postid', '$comment', '$date');";
+    $result = mysqli_query($db, $sql);
+
+    if ($result) {
+        echo ('{"isadd":true, "err":""}');
+    } else {
+        echo ('{"isadd":false, "err":"' . mysqli_error($db) . '"}');
+    }
+
+    mysqli_close($db);
+}
+
 $action = $_GET["action"];
 $data = $_POST["data"];
 
@@ -165,6 +205,20 @@ if (!$action) {
         $birthday = $_POST["birthday"];
 
         AddUser($username, $email, $password, $birthday);
+    } else if ($action === "add_post") {
+        $userid = $_POST["userid"];
+        $title = $_POST["title"];
+        $body = $_POST["body"];
+        $date = $_POST["date"];
+
+        AddPost($userid, $title, $body, $date);
+    } else if ($action === "add_comment") {
+        $userid = $_POST["userid"];
+        $postid = $_POST["postid"];
+        $comment = $_POST["comment"];
+        $date = $_POST["date"];
+
+        AddComment($userid, $postid, $comment, $date);
     }
     exit();
 }
