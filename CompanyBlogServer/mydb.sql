@@ -15,7 +15,9 @@ CREATE TABLE "Users" (
   "email" varchar(50) NOT NULL,
   "password" varchar(50) NOT NULL,
   "birthday" date NOT NULL,
-  PRIMARY KEY (id)
+  PRIMARY KEY (id),
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `email` (`email`)
 );
 
 DROP TABLE IF EXISTS `Posts`;

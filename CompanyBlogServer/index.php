@@ -116,6 +116,26 @@ function ListCommentForPost($postid)
     mysqli_close($db);
 }
 
+function AddUser($username, $email, $password, $birthday)
+{
+    $db = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+    // Check connection
+    if (!$db) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+
+    $sql = "INSERT INTO Users (username, email, password, birthday) VALUES ('$username', '$email', '$password', '$birthday');";
+    $result = mysqli_query($db, $sql);
+
+    if ($result) {
+        echo ('{"isadd":true, "err":""}');
+    } else {
+        echo ('{"isadd":false, "err":"' . mysqli_error($db) . '"}');
+    }
+
+    mysqli_close($db);
+}
+
 $action = $_GET["action"];
 $data = $_POST["data"];
 
@@ -138,6 +158,13 @@ if (!$action) {
         $postid = $_POST["postid"];
 
         ListCommentForPost($postid);
+    } else if ($action === "add_user") {
+        $username = $_POST["username"];
+        $email = $_POST["email"];
+        $password = $_POST["password"];
+        $birthday = $_POST["birthday"];
+
+        AddUser($username, $email, $password, $birthday);
     }
     exit();
 }
