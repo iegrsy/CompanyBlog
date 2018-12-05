@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -39,7 +38,7 @@ public class DataBaseUtil {
         return String.format("%s?action=%s", host, action);
     }
 
-    public static void executeQuary(final Context context, final StringRequest request) {
+    private static void executeQuary(final Context context, final StringRequest request) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -65,7 +64,7 @@ public class DataBaseUtil {
         int userid = -1;
     }
 
-    public static QLogin getLoginResponse(String s) {
+    private static QLogin getLoginResponse(String s) {
         QLogin qlogin = new QLogin();
         try {
             JSONObject object = new JSONObject(s);
@@ -206,7 +205,7 @@ public class DataBaseUtil {
 
         try {
             JSONObject object = new JSONObject(response);
-            JSONArray array = object.getJSONArray("posts");
+            JSONArray array = object.getJSONArray("comments");
             for (int i = 0; i < array.length(); i++) {
                 JSONObject o = array.getJSONObject(i);
                 CommentModel model = new CommentModel(
@@ -257,7 +256,166 @@ public class DataBaseUtil {
         executeQuary(context, stringRequest);
     }
 
-    public static String getMd5(String s) {
+    public interface AddUserListener {
+        void isCreateUser(boolean b);
+    }
+
+    public static class QUser {
+        String username;
+        String email;
+        String password;
+        String date;
+    }
+
+    public static void addUser(@NonNull Context context, final AddUserListener listener, final QUser user) {
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                boolean isAdd = false;
+                try {
+                    JSONObject object = new JSONObject(response);
+                    isAdd = object.getBoolean("isadd");
+
+                    String err = object.getString("err");
+                    if (!err.isEmpty()) Log.e(TAG, String.format("Add user err: %s", err));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                Log.i(TAG, "Add user response: " + response);
+                if (listener != null)
+                    listener.isCreateUser(isAdd);
+            }
+        };
+
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.POST,
+                getRequestUrl(ACTION_ADD_USER),
+                responseListener,
+                errorListener
+        ) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> par = new HashMap<>();
+                par.put("username", user.username);
+                par.put("email", user.email);
+                par.put("password", user.password);
+                par.put("birthday", user.date);
+
+                return par;
+            }
+        };
+
+        executeQuary(context, stringRequest);
+    }
+
+    public interface AddPostListener {
+        void isAddPost(boolean b);
+    }
+
+    public static class QPost {
+        int userid;
+        String title;
+        String body;
+        String date;
+    }
+
+    public static void addPost(@NonNull Context context, final AddPostListener listener, final QPost post) {
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                boolean isAdd = false;
+                try {
+                    JSONObject object = new JSONObject(response);
+                    isAdd = object.getBoolean("isadd");
+
+                    String err = object.getString("err");
+                    if (!err.isEmpty()) Log.e(TAG, String.format("Add post err: %s", err));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                Log.i(TAG, "Add post response: " + response);
+                if (listener != null)
+                    listener.isAddPost(isAdd);
+            }
+        };
+
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.POST,
+                getRequestUrl(ACTION_ADD_POST),
+                responseListener,
+                errorListener
+        ) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> par = new HashMap<>();
+                par.put("userid", String.valueOf(post.userid));
+                par.put("title", post.title);
+                par.put("body", post.body);
+                par.put("date", post.date);
+
+                return par;
+            }
+        };
+
+        executeQuary(context, stringRequest);
+    }
+
+    public interface AddCommentListener {
+        void isAddComment(boolean b);
+    }
+
+    public static class QComment {
+        int userid;
+        int postid;
+        String comment;
+        String date;
+    }
+
+    public static void addComment(@NonNull Context context, final AddCommentListener listener, final QComment comment) {
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                boolean isAdd = false;
+                try {
+                    JSONObject object = new JSONObject(response);
+                    isAdd = object.getBoolean("isadd");
+
+                    String err = object.getString("err");
+                    if (!err.isEmpty()) Log.e(TAG, String.format("Add comment err: %s", err));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                Log.i(TAG, "Add comment response: " + response);
+                if (listener != null)
+                    listener.isAddComment(isAdd);
+            }
+        };
+
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.POST,
+                getRequestUrl(ACTION_ADD_COMMENT),
+                responseListener,
+                errorListener
+        ) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> par = new HashMap<>();
+                par.put("userid", String.valueOf(comment.userid));
+                par.put("postid", String.valueOf(comment.postid));
+                par.put("comment", comment.comment);
+                par.put("date", comment.date);
+
+                return par;
+            }
+        };
+
+        executeQuary(context, stringRequest);
+    }
+
+    private static String getMd5(String s) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] array = md.digest(s.getBytes());
