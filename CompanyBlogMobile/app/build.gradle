@@ -18,7 +18,7 @@ android {
     }
 }
 
-def BUTTER_KNIFE_VERSION="8.8.1" //current version of butterknife
+def BUTTER_KNIFE_VERSION = "8.8.1" //current version of butterknife
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
