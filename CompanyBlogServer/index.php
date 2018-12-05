@@ -17,10 +17,10 @@ function Login($username, $email, $password)
     $count = mysqli_num_rows($result);
 
     if ($count == 1) {
-        $row = mysqli_fetch_row($result);
+        $row = mysqli_fetch_assoc($result);
         echo ('{"userid":' . $row["id"] . ', "islogin":true, "err":""}');
     } else {
-        echo ('{"islogin":false, "err":"User not found."}');
+        echo ('{"userid":-1, islogin":false, "err":"User not found."}');
     }
 
     mysqli_close($db);
