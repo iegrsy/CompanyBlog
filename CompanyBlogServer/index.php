@@ -45,7 +45,7 @@ function ListAllPost()
                 $list = $list . ',';
             }
 
-            $list = $list . '{"postid":' . $row["id"] . ', username":"' . $row["username"] . '", "title":"' .
+            $list = $list . '{"postid":' . $row["id"] . ', "username":"' . $row["username"] . '", "title":"' .
                 $row["title"] . '", "body":"' . $row["body"] . '", "date":"' . $row["date"] . '"}';
         }
         echo ("{\"posts\":[$list], \"err\":\"\"}");
@@ -75,7 +75,7 @@ function ListPostForUser($userid)
                 $list = $list . ',';
             }
 
-            $list = $list . '{"postid":' . $row["id"] . ', username":"' . $row["username"] . '", "title":"' .
+            $list = $list . '{"postid":' . $row["id"] . ', "username":"' . $row["username"] . '", "title":"' .
                 $row["title"] . '", "body":"' . $row["body"] . '", "date":"' . $row["date"] . '"}';
         }
         echo ("{\"posts\":[$list], \"err\":\"\"}");
@@ -105,7 +105,7 @@ function ListCommentForPost($postid)
                 $list = $list . ',';
             }
 
-            $list = $list . '{"commentid":' . $row["id"] . ', username":"' . $row["username"] . '", "comment":"' .
+            $list = $list . '{"commentid":' . $row["id"] . ', "username":"' . $row["username"] . '", "comment":"' .
                 $row["comment"] . '", "date":"' . $row["date"] . '"}';
         }
         echo ("{\"comments\":[$list], \"err\":\"\"}");
