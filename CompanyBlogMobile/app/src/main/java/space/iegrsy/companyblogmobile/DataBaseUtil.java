@@ -33,7 +33,6 @@ public class DataBaseUtil {
     private static final String ACTION_ADD_POST = "add_post";
     private static final String ACTION_ADD_COMMENT = "add_comment";
 
-    private static Thread execThread;
     private static final String host = "http://10.5.20.41/index.php";
 
     private static String getRequestUrl(String action) {
@@ -41,20 +40,13 @@ public class DataBaseUtil {
     }
 
     public static void executeQuary(final Context context, final StringRequest request) {
-        if (execThread != null) {
-            execThread.interrupt();
-            execThread = null;
-        }
-
-        execThread = new Thread(new Runnable() {
+        new Thread(new Runnable() {
             @Override
             public void run() {
                 RequestQueue queue = Volley.newRequestQueue(context);
                 queue.add(request);
             }
-        });
-
-        execThread.start();
+        }).start();
     }
 
     private static Response.ErrorListener errorListener = new Response.ErrorListener() {
