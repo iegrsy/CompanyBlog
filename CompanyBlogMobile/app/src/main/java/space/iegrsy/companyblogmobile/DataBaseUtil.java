@@ -4,8 +4,6 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -21,8 +19,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UtilDataBase {
-    private static final String TAG = UtilDataBase.class.getSimpleName();
+public class DataBaseUtil {
+    private static final String TAG = DataBaseUtil.class.getSimpleName();
 
     private static final String ACTION_LOGIN = "login";
     private static final String ACTION_LIST_ALL_POST = "list_all_post";
