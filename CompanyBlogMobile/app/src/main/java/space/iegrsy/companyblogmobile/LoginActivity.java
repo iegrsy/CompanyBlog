@@ -60,7 +60,8 @@ public class LoginActivity extends AppCompatActivity {
 
     @OnClick(R.id.lgn_txt_signup)
     void signup() {
-        Toast.makeText(this, "signup click", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(LoginActivity.this, SignupActivity.class));
+        overridePendingTransition(R.anim.right_to_left, R.anim.left_to_right);
     }
 
     @Override

@@ -3,6 +3,7 @@ package space.iegrsy.companyblogmobile;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -267,7 +268,7 @@ public class DataBaseUtil {
         String date;
     }
 
-    public static void addUser(@NonNull Context context, final AddUserListener listener, final QUser user) {
+    public static void addUser(@NonNull final Context context, final AddUserListener listener, final QUser user) {
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -277,7 +278,11 @@ public class DataBaseUtil {
                     isAdd = object.getBoolean("isadd");
 
                     String err = object.getString("err");
-                    if (!err.isEmpty()) Log.e(TAG, String.format("Add user err: %s", err));
+                    if (!err.isEmpty()) {
+                        Log.e(TAG, String.format("Add user err: %s", err));
+                        Toast.makeText(context, String.format("Add user err: %s", err),
+                                Toast.LENGTH_SHORT).show();
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -299,7 +304,7 @@ public class DataBaseUtil {
                 Map<String, String> par = new HashMap<>();
                 par.put("username", user.username);
                 par.put("email", user.email);
-                par.put("password", user.password);
+                par.put("password", getMd5(user.password));
                 par.put("birthday", user.date);
 
                 return par;
