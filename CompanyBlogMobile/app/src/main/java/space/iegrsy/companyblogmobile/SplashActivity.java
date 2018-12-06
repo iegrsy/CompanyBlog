@@ -27,7 +27,14 @@ public class SplashActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                AuthenticationUtil.Authentication authentication = AuthenticationUtil.newInstance(context);
+                if (authentication == null)
+                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                else {
+                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                    intent.putExtra("userid", authentication.userid);
+                    startActivity(intent);
+                }
                 context.finish();
             }
         }).start();

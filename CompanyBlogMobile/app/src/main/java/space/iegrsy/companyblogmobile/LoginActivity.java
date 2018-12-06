@@ -32,13 +32,21 @@ public class LoginActivity extends AppCompatActivity {
         public void onLoginRest(boolean islogin, int userid) {
             showProgress(false);
             if (islogin) {
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                intent.putExtra("userid", userid);
-                startActivity(intent);
+                try {
+                    AuthenticationUtil.setAuthUser(LoginActivity.this, userid, _username);
+                    AuthenticationUtil.setPrefIsAuth(LoginActivity.this, true);
 
-                finish();
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.putExtra("userid", userid);
+                    startActivity(intent);
+
+                    finish();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             } else {
-                Toast.makeText(getApplicationContext(), "Worng username or password", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Wrong username or password", Toast.LENGTH_SHORT).show();
             }
         }
     };
