@@ -1,10 +1,12 @@
-package space.iegrsy.companyblogmobile;
+package space.iegrsy.companyblogmobile.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import space.iegrsy.companyblogmobile.helper.AuthenticationUtil;
+import space.iegrsy.companyblogmobile.R;
 
 public class SplashActivity extends AppCompatActivity {
 

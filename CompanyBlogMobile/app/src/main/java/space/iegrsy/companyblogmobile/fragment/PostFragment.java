@@ -1,4 +1,4 @@
-package space.iegrsy.companyblogmobile;
+package space.iegrsy.companyblogmobile.fragment;
 
 import android.support.v4.app.Fragment;
 

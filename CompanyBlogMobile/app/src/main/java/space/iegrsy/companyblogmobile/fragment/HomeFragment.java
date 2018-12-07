@@ -1,4 +1,4 @@
-package space.iegrsy.companyblogmobile;
+package space.iegrsy.companyblogmobile.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -15,6 +15,11 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+
+import space.iegrsy.companyblogmobile.helper.DataBaseUtil;
+import space.iegrsy.companyblogmobile.adapter.PostAdapter;
+import space.iegrsy.companyblogmobile.models.PostModel;
+import space.iegrsy.companyblogmobile.R;
 
 @SuppressLint("ValidFragment")
 public class HomeFragment extends Fragment {

@@ -1,4 +1,4 @@
-package space.iegrsy.companyblogmobile;
+package space.iegrsy.companyblogmobile.helper;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -11,8 +11,8 @@ public class AuthenticationUtil {
     private static final String PREF_USERID = "userid";
     private static final String PREF_USERNAME = "username";
 
-    static class Authentication {
-        int userid = -1;
+    public static class Authentication {
+        public int userid = -1;
         String username = "";
 
         Authentication(int userid, String username) {

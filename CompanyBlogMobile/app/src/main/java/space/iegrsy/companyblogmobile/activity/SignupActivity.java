@@ -1,4 +1,4 @@
-package space.iegrsy.companyblogmobile;
+package space.iegrsy.companyblogmobile.activity;
 
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
@@ -6,11 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import space.iegrsy.companyblogmobile.helper.DataBaseUtil;
+import space.iegrsy.companyblogmobile.R;
 
 public class SignupActivity extends AppCompatActivity {
     private static final String TAG = SignupActivity.class.getSimpleName();

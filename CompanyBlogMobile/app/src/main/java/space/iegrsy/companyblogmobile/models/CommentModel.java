@@ -1,4 +1,4 @@
-package space.iegrsy.companyblogmobile;
+package space.iegrsy.companyblogmobile.models;
 
 import java.io.Serializable;
 

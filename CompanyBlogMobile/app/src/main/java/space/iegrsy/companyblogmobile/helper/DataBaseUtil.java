@@ -1,4 +1,4 @@
-package space.iegrsy.companyblogmobile;
+package space.iegrsy.companyblogmobile.helper;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -21,6 +21,9 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import space.iegrsy.companyblogmobile.models.CommentModel;
+import space.iegrsy.companyblogmobile.models.PostModel;
 
 public class DataBaseUtil {
     private static final String TAG = DataBaseUtil.class.getSimpleName();
@@ -262,10 +265,10 @@ public class DataBaseUtil {
     }
 
     public static class QUser {
-        String username;
-        String email;
-        String password;
-        String date;
+        public String username;
+        public String email;
+        public String password;
+        public String date;
     }
 
     public static void addUser(@NonNull final Context context, final AddUserListener listener, final QUser user) {

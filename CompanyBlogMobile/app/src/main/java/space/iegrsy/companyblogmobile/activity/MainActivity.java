@@ -1,4 +1,4 @@
-package space.iegrsy.companyblogmobile;
+package space.iegrsy.companyblogmobile.activity;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,10 +9,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import space.iegrsy.companyblogmobile.fragment.HomeFragment;
+import space.iegrsy.companyblogmobile.fragment.ProfileFragment;
+import space.iegrsy.companyblogmobile.R;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();

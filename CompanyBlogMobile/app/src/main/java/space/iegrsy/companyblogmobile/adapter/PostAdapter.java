@@ -1,4 +1,4 @@
-package space.iegrsy.companyblogmobile;
+package space.iegrsy.companyblogmobile.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -10,13 +10,16 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import space.iegrsy.companyblogmobile.R;
+import space.iegrsy.companyblogmobile.models.PostModel;
+
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
 
     private ArrayList<PostModel> mData;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
-    PostAdapter(Context context, ArrayList<PostModel> data) {
+    public PostAdapter(Context context, ArrayList<PostModel> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }
@@ -54,7 +57,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         void onItemClick(View view, int position);
     }
 
-    void setClickListener(ItemClickListener itemClickListener) {
+    public void setClickListener(ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
     }
 
