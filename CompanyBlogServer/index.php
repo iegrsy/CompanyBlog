@@ -94,7 +94,7 @@ function ListCommentForPost($postid)
         die("Connection failed: " . mysqli_connect_error());
     }
 
-    $sql = "SELECT c.id, u.username, c.comment, c.date FROM Comments c JOIN Posts p ON c.postid=$postid JOIN Users u ON c.userid=u.id ORDER BY c.date";
+    $sql = "SELECT c.id, u.username, c.comment, c.date FROM Comments c JOIN Users u ON c.userid = u.id WHERE c.postid = $postid ORDER BY c.date";
     $result = mysqli_query($db, $sql);
 
     if (mysqli_num_rows($result) > 0) {

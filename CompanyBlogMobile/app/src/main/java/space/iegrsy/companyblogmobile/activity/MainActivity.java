@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initUI() {
-        homeFragment = new HomeFragment(this);
+        homeFragment = new HomeFragment(this, userid);
         profileFragment = new ProfileFragment(this, userid);
 
         fragmentManager = getSupportFragmentManager();

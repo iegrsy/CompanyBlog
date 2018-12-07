@@ -1,5 +1,6 @@
 package space.iegrsy.companyblogmobile.helper;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -18,7 +19,9 @@ import org.json.JSONObject;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -375,10 +378,10 @@ public class DataBaseUtil {
     }
 
     public static class QComment {
-        int userid;
-        int postid;
-        String comment;
-        String date;
+        public int userid;
+        public int postid;
+        public String comment;
+        public String date;
     }
 
     public static void addComment(@NonNull Context context, final AddCommentListener listener, final QComment comment) {
@@ -436,5 +439,14 @@ public class DataBaseUtil {
             e.printStackTrace();
         }
         return "";
+    }
+
+    public static String getTimeStr(long ts) {
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Date date = new Date(ts);
+        String dateString = dateFormat.format(date);
+
+        return dateString;
     }
 }

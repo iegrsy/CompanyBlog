@@ -5,4 +5,5 @@
     <color name="colorAccent">#9c2222</color>
 
     <color name="colorNavigation">#aaffffff</color>
+    <color name="colorNavigationDark">#ddffffff</color>
 </resources>

@@ -24,6 +24,8 @@ import space.iegrsy.companyblogmobile.R;
 @SuppressLint("ValidFragment")
 public class HomeFragment extends Fragment {
     private Activity context;
+    private int userid;
+
     private SwipeRefreshLayout refreshLayout;
     private RecyclerView listView;
 
@@ -33,13 +35,14 @@ public class HomeFragment extends Fragment {
     private PostAdapter.ItemClickListener itemClickListener = new PostAdapter.ItemClickListener() {
         @Override
         public void onItemClick(View view, int position) {
-            Toast.makeText(context, "You clicked " + postAdapter.getItem(position).getTitle() +
-                    " on row number " + position, Toast.LENGTH_SHORT).show();
+            new PostFragment(context, userid).show(postAdapter.getItem(position));
         }
     };
 
-    public HomeFragment(@NonNull Activity context) {
+    public HomeFragment(@NonNull Activity context, int userid) {
         this.context = context;
+        this.userid = userid;
+
         postList = new ArrayList<>();
         postAdapter = new PostAdapter(context, postList);
         postAdapter.setClickListener(itemClickListener);
@@ -71,6 +74,7 @@ public class HomeFragment extends Fragment {
     DataBaseUtil.GetPostListener postListener = new DataBaseUtil.GetPostListener() {
         @Override
         public void onRequestAllPost(ArrayList<PostModel> list) {
+            postList = list;
             postAdapter.setPostList(list);
             refreshLayout.setRefreshing(false);
         }
