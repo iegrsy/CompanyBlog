@@ -28,9 +28,15 @@
             android:src="@android:drawable/ic_lock_power_off" />
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/profile_post_list"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/profile_post_list_refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/profile_post_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>
