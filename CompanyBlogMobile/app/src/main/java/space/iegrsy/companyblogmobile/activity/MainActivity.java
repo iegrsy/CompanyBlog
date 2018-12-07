@@ -13,6 +13,7 @@ import android.widget.FrameLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import space.iegrsy.companyblogmobile.fragment.HomeFragment;
+import space.iegrsy.companyblogmobile.fragment.NewPostFragment;
 import space.iegrsy.companyblogmobile.fragment.ProfileFragment;
 import space.iegrsy.companyblogmobile.R;
 
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private HomeFragment homeFragment;
     private ProfileFragment profileFragment;
+    private NewPostFragment newPostFragment;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -39,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_profile:
                     switchFragment(profileFragment);
+                    return true;
+                case R.id.navigation_add:
+                    switchFragment(newPostFragment);
                     return true;
             }
             return false;
@@ -64,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
     private void initUI() {
         homeFragment = new HomeFragment(this, userid);
         profileFragment = new ProfileFragment(this, userid);
+        newPostFragment = new NewPostFragment(this, userid);
 
         fragmentManager = getSupportFragmentManager();
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);

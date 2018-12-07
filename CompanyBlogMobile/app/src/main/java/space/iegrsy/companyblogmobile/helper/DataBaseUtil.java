@@ -325,10 +325,10 @@ public class DataBaseUtil {
     }
 
     public static class QPost {
-        int userid;
-        String title;
-        String body;
-        String date;
+        public int userid;
+        public String title;
+        public String body;
+        public String date;
     }
 
     public static void addPost(@NonNull Context context, final AddPostListener listener, final QPost post) {
