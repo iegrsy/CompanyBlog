@@ -20,6 +20,7 @@
             android:textSize="25sp" />
 
         <ImageButton
+            android:id="@+id/profile_post_btn_logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
