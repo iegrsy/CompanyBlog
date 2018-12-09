@@ -11,9 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 
 import space.iegrsy.companyblogmobile.R;
+import space.iegrsy.companyblogmobile.activity.MainActivity;
 import space.iegrsy.companyblogmobile.helper.DataBaseUtil;
 
 @SuppressLint("ValidFragment")
@@ -24,6 +26,7 @@ public class NewPostFragment extends Fragment {
     private EditText edTitle;
     private EditText edBody;
     private ImageButton btnSend;
+    private FrameLayout progress;
 
     public NewPostFragment(Activity context, int userid) {
         this.context = context;
@@ -38,6 +41,7 @@ public class NewPostFragment extends Fragment {
         edTitle = (EditText) rootView.findViewById(R.id.new_post_title);
         edBody = (EditText) rootView.findViewById(R.id.new_post_body);
         btnSend = (ImageButton) rootView.findViewById(R.id.new_post_send_btn);
+        progress = (FrameLayout) rootView.findViewById(R.id.new_post_progressbar_container);
         btnSend.setOnClickListener(clickListener);
 
         return rootView;
@@ -62,6 +66,7 @@ public class NewPostFragment extends Fragment {
             post.body = body;
             post.date = date;
 
+            showProgress(true);
             DataBaseUtil.addPost(context, addPostListener, post);
         }
     };
@@ -69,12 +74,18 @@ public class NewPostFragment extends Fragment {
     DataBaseUtil.AddPostListener addPostListener = new DataBaseUtil.AddPostListener() {
         @Override
         public void isAddPost(boolean b) {
-            if (b)
+            showProgress(false);
+            if (b) {
                 Snackbar.make(context.findViewById(android.R.id.content),
                         "Post added.", Snackbar.LENGTH_SHORT).show();
-            else
+                ((MainActivity) context).goHomePage();
+            } else
                 Snackbar.make(context.findViewById(android.R.id.content),
                         "Not post try again later.", Snackbar.LENGTH_SHORT).show();
         }
     };
+
+    private void showProgress(boolean b) {
+        progress.setVisibility(b ? View.VISIBLE : View.GONE);
+    }
 }

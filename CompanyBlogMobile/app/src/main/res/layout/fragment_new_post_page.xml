@@ -70,4 +70,35 @@
                 android:layout_height="match_parent" />
         </LinearLayout>
     </ScrollView>
+
+    <FrameLayout
+        android:id="@+id/new_post_progressbar_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#aaaaaaaa"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ProgressBar
+            style="@android:style/Widget.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="30dp"
+            android:indeterminate="true"
+            android:max="100" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="55dp"
+            android:text="Please wait..."
+            android:textColor="@color/colorAccent"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+    </FrameLayout>
 </android.support.constraint.ConstraintLayout>

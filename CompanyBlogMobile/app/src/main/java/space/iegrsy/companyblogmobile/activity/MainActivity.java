@@ -80,4 +80,8 @@ public class MainActivity extends AppCompatActivity {
         if (fragment != null)
             fragmentManager.beginTransaction().replace(R.id.home_container, fragment).commit();
     }
+
+    public void goHomePage() {
+        switchFragment(homeFragment);
+    }
 }
