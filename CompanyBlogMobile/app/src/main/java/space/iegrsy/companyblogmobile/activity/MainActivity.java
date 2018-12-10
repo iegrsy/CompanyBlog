@@ -1,5 +1,6 @@
 package space.iegrsy.companyblogmobile.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -26,10 +27,10 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.home_navigation)
     BottomNavigationView navigation;
 
+    private Activity context = this;
     private FragmentManager fragmentManager;
     private HomeFragment homeFragment;
     private ProfileFragment profileFragment;
-    private NewPostFragment newPostFragment;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                     switchFragment(profileFragment);
                     return true;
                 case R.id.navigation_add:
-                    switchFragment(newPostFragment);
+                    switchFragment(new NewPostFragment(context, userid));
                     return true;
             }
             return false;
@@ -69,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
     private void initUI() {
         homeFragment = new HomeFragment(this, userid);
         profileFragment = new ProfileFragment(this, userid);
-        newPostFragment = new NewPostFragment(this, userid);
 
         fragmentManager = getSupportFragmentManager();
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
