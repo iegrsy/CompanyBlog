@@ -83,6 +83,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        refreshLayout.setRefreshing(true);
         DataBaseUtil.getAllPost(context, postListener);
     }
 }

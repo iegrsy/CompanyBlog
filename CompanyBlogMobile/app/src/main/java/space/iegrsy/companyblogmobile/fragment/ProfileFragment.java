@@ -113,6 +113,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        refreshLayout.setRefreshing(true);
         DataBaseUtil.getUserAllPost(context, postListener, userid);
     }
 }
